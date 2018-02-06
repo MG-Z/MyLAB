@@ -1,5 +1,7 @@
 package com.Linked;
 
+import java.util.List;
+
 /**
  * func desc:
  */
@@ -10,11 +12,68 @@ public class LinkedContext {
         Linked<Integer> linked = new Linked<>();
         linked.addFirst(1).addFirst(2).addFirst(3).addFirst(4);
         linked.addLast(-1).addLast(-2).addLast(-3).addLast(-4);
-//        linked.addLast(1).addLast(2);
-        linked.remove(-4);
-        linked.removeFirst();
-        linked.removeLast();
         System.out.println(linked.toString());
+        transferToHead(linked, 2, 3);
+        System.out.println(linked.toString());
+
+        reverse(linked);
+        System.out.println(linked.toString());
+    }
+
+    public static <E> void reverse(Linked<E> list) {
+        Node<E> temp, h = list.head;
+        while (h.next != null) {
+            temp = h.next;
+            h.next = h.next.next;
+            temp.next = list.head;
+            list.head = temp;
+        }
+    }
+
+    /**
+     * 移动指定开始到结束节点到链表头   A->B->C->D->E  => C->D->A->B->E
+     *
+     * @param list 给定节点
+     * @param from 开始移动的节点  start with zero
+     * @param to   结束的节点      start with zero
+     */
+    public static <E> void transferToHead(Linked<E> list, int from, int to) {
+        if (from > to) throw new RuntimeException(" from can not greater than to");
+        if (from == 0) return;  // 处理头结点问题
+        Node<E> h = list.head;
+        int size = 0; //统计链表长度
+        while (h != null) {
+            size++;
+            h = h.next;
+        }
+
+        if (size == 0 || from >= size) return;
+
+        if (to >= size) to = size - 1;
+
+        Node<E> fromNode = null, toNode = null, search = list.head;
+        int cursor = 0;
+
+        while (search != null) {
+            if (cursor + 1 == from) fromNode = search;
+            if (cursor == to) {
+                toNode = search;
+                break;
+            }
+            search = search.next;
+            cursor++;
+        }
+
+        if (fromNode == null || toNode == null) throw new RuntimeException("can not location nodes");
+        Node<E> tempH = list.head;
+        Node<E> tempNewH = fromNode.next;
+        fromNode.next = toNode.next;
+        //处理tail
+        if (fromNode.next == null) {
+            list.tail = fromNode;
+        }
+        toNode.next = tempH;
+        list.head = tempNewH;
     }
 
 
@@ -133,12 +192,14 @@ public class LinkedContext {
             Node<E> p = head;
             while (p != null) {
                 sb.append(p.toString());
-                if(p.next != null){
+                if (p.next != null) {
                     sb.append("->");
                 }
                 p = p.next;
             }
             sb.append('}');
+
+            sb.append("\nhead:").append(head.toString()).append("tail:").append(tail.toString());
             return sb.toString();
         }
     }
