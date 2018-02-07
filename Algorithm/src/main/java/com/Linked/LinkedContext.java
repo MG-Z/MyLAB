@@ -1,8 +1,8 @@
 package com.Linked;
 
-import java.util.List;
 
 /**
+ * 包含头尾结点的单向链表
  * func desc:
  */
 public class LinkedContext {
@@ -74,25 +74,6 @@ public class LinkedContext {
         }
         toNode.next = tempH;
         list.head = tempNewH;
-    }
-
-
-    static class Node<E> {
-        E item;
-        Node<E> next;
-
-        public Node(E item, Node<E> next) {
-            this.item = item;
-            this.next = next;
-        }
-
-        @Override
-        public String toString() {
-            final StringBuilder sb = new StringBuilder("[");
-            sb.append(item);
-            sb.append(']');
-            return sb.toString();
-        }
     }
 
     static class Linked<E> {

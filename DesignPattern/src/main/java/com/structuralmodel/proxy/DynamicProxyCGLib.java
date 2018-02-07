@@ -40,8 +40,8 @@ public class DynamicProxyCGLib {
         System.out.println("----------------analyze------------------------");
 
         try {
-            Class<?> c = Class.forName("zj.design.proxy.DynamicProxyCGLib$TargetCGLib$$EnhancerByCGLIB$$f9c5d708");
-            Class<?> beanc = Class.forName("zj.design.proxy.DynamicProxyCGLib$TargetCGLib");
+            Class<?> c = Class.forName("com.structuralmodel.proxy.DynamicProxyCGLib$TargetCGLib$$EnhancerByCGLIB$$f9c5d708");
+            Class<?> beanc = Class.forName("com.structuralmodel.proxy.DynamicProxyCGLib$TargetCGLib");
 
             Method[] beanc_method = beanc.getMethods();
             int i = 1;
@@ -128,7 +128,7 @@ public class DynamicProxyCGLib {
 
         public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
             Object ret = methodProxy.invokeSuper(o, objects);
-            System.out.println("CGLib InspectJ " + ret.toString());
+            System.out.println("CGLib  " + ret.toString());
             return ret;
         }
     }
