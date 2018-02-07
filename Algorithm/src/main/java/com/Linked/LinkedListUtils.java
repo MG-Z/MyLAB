@@ -34,7 +34,7 @@ public class LinkedListUtils {
             return p;  // 头结点指向尾结点
         }
         Node<E> head = recursionNode(p.next);
-        p.next.next = p;  // 将尾结点作为头结点,反向向头结点中插入结点
+        p.next.next = p;  // 将尾结点作为头结点,反向获取结点依次插入
         p.next = null;
         return head;
     }
